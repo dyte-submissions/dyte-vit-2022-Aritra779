@@ -1,0 +1,39 @@
+{
+  "name": "dyte-vit-2022-aritra779",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7943839&assignment_repo_type=AssignmentRepo)\r <div id=\"top\"></div>\r <!--\r *** Thanks for checking out the Best-README-Template. If you have a suggestion\r *** that would make this better, please fork the repo and create a pull request\r *** or simply open an issue with the tag \"enhancement\".\r *** Don't forget to give the project a star!\r *** Thanks again! Now go create something AMAZING! :D\r -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --experimental-json-modules --timeout 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-submissions/dyte-vit-2022-Aritra779.git"
+  },
+  "keywords": [],
+  "author": "Aritra Dutta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/issues"
+  },
+  "homepage": "https://github.com/dyte-submissions/dyte-vit-2022-Aritra779#readme",
+  "dependencies": {
+    "@octokit/rest": "^18.12.0",
+    "chalk": "^5.0.1",
+    "commander": "^9.3.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "get-repo-package-json": "^2.0.0",
+    "github-url-to-object": "^4.0.6"
+  },
+  "bin": {
+    "myawesometool": "./index.js"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.1",
+    "mocha": "^10.0.0",
+    "nock": "^13.2.4"
+  }
+}

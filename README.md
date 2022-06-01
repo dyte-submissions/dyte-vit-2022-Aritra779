@@ -34,10 +34,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">myawesometool</h3>
 
   <p align="center">
-    project_description
+    A CLI tool to automatically check for dependency of a specified package and the create a PR updating the package.
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
@@ -84,7 +84,11 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
+<b>The Documentation will be updated later.</b>
+<br/>
+<b>Currently works with only github.</b>
+<b>Currently works for versions with '^' AND '~' notation. Compatibility update coming soon.</b>
+<br/>
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -109,12 +113,12 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
+* node
 * npm
   ```sh
   npm install npm@latest -g
@@ -122,28 +126,49 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get your personal access token from github(required only when using the -u option. not required for the -i option). Follow this for creating your PAT [https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/dyte-submissions/dyte-vit-2022-Aritra779.git
    ```
 3. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+4. Enter your PAT in a `.env` file in `G_TOKEN` variable. Change the name everywhere if you wish.
    ```js
-   const API_KEY = 'ENTER YOUR API';
+  G_TOKEN = 'ENTER YOUR PAT';
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### How to use
 
-
+* Move into the project directory from command line tool
+* ```sh
+myawesometool -h
+``` 
+for help
+* ```sh
+myawesometool -i <csv file(with extension)> <package_name@version>
+``` 
+for taking a csv file and listing out denpendency version satifiability status
+* ```sh
+myswesometool -i -u <csv file(with extension)> <package_name@version>
+``` 
+for checking and updating. This required github PAT.
+* ```sh
+npm test
+``` 
+is incomplete. currently only fork test is implemented. 
+* don't run it outside of the project directory for the time being (will be looked into later)
+* A lot(most) of the logic makes no sence (specially asynchoronous ones).This was developed with 'have to work anyhow' in mind and not 'should be logically sound'. 
+* Currently the code does not delete the local cloned repository. So delete them manually. Will try to automate as soon as possible 
+* There's a sample_d.csv file with two repo links. (optinal)Delete the last 3 columns. First repo doesn't have axios. It's my personal repo. Second one has axios 0.23.0. So for testing test with anything higher than that.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Will add more info here. 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -154,10 +179,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Documention (High Priority)
+- [ ] `npm test` (High Priority)
+- [ ] Move from 'have to work anyhow' to 'should be logically sound' (High Priority)
+- [ ] reduce dependency (Normal Priority)
+    - [ ] csv-parser (low Priority)
+    - [ ] csv-writer (low Priority)
+    - [ ] get-repo-package-json (High Priority)
+    - [ ] github-url-to-object (Not Likely)
+    - [ ] chalk (Probably Not)
+    - [ ] commander (When there's a better option)
+- [ ] Robustness
+- [ ] More features I can't think of right now
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -194,7 +227,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 ## Contact
-
+will update later
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
