@@ -114,7 +114,7 @@ const updateDependency = async (user, repo, pckg) => {
       let cloneResponse = clone_and_push(forkResponse.data["html_url"], pckg,repo);
       let {data : {login}} = await octokit.request('GET /user', {})
       let pullResponse = await pull(user,repo, login, pckg)
-      return pullResponse.data.url;
+      return pullResponse.data["html_url"];
     }catch(err){
       console.log(chalk.red(`\nSomething looks suspicious. Here take a look at the error ${err}\n`))
     }

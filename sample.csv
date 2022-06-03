@@ -1,5 +1,5 @@
 name,repo,version,version_satisfied,update_pr
 dyte-react-sample-app,https://github.com/dyte-in/react-sample-app/,^0.24.0,false,
-dyte-js-sample-app,https://github.com/dyte-in/react-sample-app/commit/3cf5e72b670ffcf0d13895669842cc651ebe04b5,^0.24.0,false,
+dyte-js-sample-app,https://github.com/dyte-in/react-sample-app,^0.24.0,false,
 dyte-sample-app-backend,https://github.com/dyte-in/backend-sample-app,^0.23.0,false,
 kolom,https://github.com/Aritra779/kolom,,FALSE,

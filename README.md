@@ -79,41 +79,54 @@
   </ol>
 </details>
 
-
+___
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Automatic Pull requests like below
+
+![Product Name Screen Shot][product-screenshot]
 
 *Currently works with only github.*
 
-*Currently works for versions with '^' and '~' notation. Compatibility update coming soon.*
-
 This project is about building a simple CLI tool that will look through a file(currently only .csv file) and let the user know about the version of specified dependency of a project/repo listed in the file. It also writes the same info onto the file.
 
-In addition to that if the version is below specified version it'll automatically `fork`, `clone`, `update`, `push` and `create a PR` to the original repo. Provided we tell it to do so.
+The link to the repository can be any one of the following format:
+(taken straight out of [github-url-to-object](https://www.npmjs.com/package/github-url-to-object) page)
+<pre>
+  * 'github:monkey/business'
+  * 'https://github.com/monkey/business'
+  * 'https://github.com/monkey/business/tree/master'
+  * 'github:monkey/business#nachos'
+  * 'https://github.com/monkey/business/tree/master/nested/file.js'
+  * 'https://github.com/monkey/business.git'
+  * 'http://github.com/monkey/business'
+  * 'git://github.com/monkey/business.git'
+  * 'git+https://github.com/monkey/business.git'
+</pre>
+
+In addition to the above mentioned task if the version is below specified version it'll automatically `fork`, `clone`, `update`, `push` and `create a PR` to the original repo. Provided we tell it to do so.
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
-
-* [nodeJS](https://nodejs.org/)
-* [npm](https://www.npmjs.com/)
-* [commander](https://www.npmjs.com/package/commander)
-* [chalk](https://www.npmjs.com/package/chalk)
-* [csv-parser](https://www.npmjs.com/package/csv-parser)
-* [csv-writer](https://www.npmjs.com/package/csv-writer)
-* [dotenv](https://www.npmjs.com/package/dotenv)
-* [octokit/rest](https://www.npmjs.com/package/@octokit/rest)
-* [github-url-to-object](https://www.npmjs.com/package/github-url-to-object)
-* [nock](https://www.npmjs.com/package/nock)
-* [mocha](https://www.npmjs.com/package/mocha)
-* [chai](https://www.npmjs.com/package/chai)
+- Platforms and Registry
+  * [nodeJS](https://nodejs.org/)
+  * [npm](https://www.npmjs.com/)
+- Libraries(for Core Functionality)
+  * [commander](https://www.npmjs.com/package/commander)
+  * [chalk](https://www.npmjs.com/package/chalk)
+  * [csv-parser](https://www.npmjs.com/package/csv-parser)
+  * [csv-writer](https://www.npmjs.com/package/csv-writer)
+  * [dotenv](https://www.npmjs.com/package/dotenv)
+  * [octokit/rest](https://www.npmjs.com/package/@octokit/rest)
+  * [github-url-to-object](https://www.npmjs.com/package/github-url-to-object)
+- Libraries (for Testing)
+  * [nock](https://www.npmjs.com/package/nock)
+  * [mocha](https://www.npmjs.com/package/mocha)
+  * [chai](https://www.npmjs.com/package/chai)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
@@ -171,7 +184,7 @@ In order to use this project/ repo / tool there are certain pre-requisites.
     ```sh
     myawesometool -update -i <somefile.csv> <package_name@version>
     ``` 
-    **This requires github PAT.**
+    **This requires github PAT(Personal Access Token).**
 
     *Also note that this will not update the mentioned package if the mentioned version isn't in the compatibility range mentioned in the package.json*
 * For forcefully updating a package even if it might break certain features run
@@ -181,15 +194,18 @@ In order to use this project/ repo / tool there are certain pre-requisites.
 * ```sh
   npm test
   ``` 
-  is currently has only 4 tests. Fork test and Pull test tests the corespoding API call. The API call is mocked. You can test it out without a worry. The other two tests are for testing out API call to get the package.json file of any repo. These two calls are also mocked. Hence you can test it out without a single worry.
+  currently has only 4 tests. Fork test and Pull test test the correspoding API calls. The API call is mocked. You can test it out without a worry. The other two tests are for testing out API call to get the package.json file of any repo. These two calls are also mocked. Hence you can test it out without a single worry.
 * Don't run it outside of the project directory for the time being (*will be looked into later*)
 * There's a sample_d.csv file with two repo links. (optinal)Delete the last 3 columns(everything except `name` and `repo` column). First repo doesn't have `axios`. It's my personal repo. Second one has `axios 0.23.0`. So for testing test with anything higher than that.
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 <div align = 'center'>
 
-![i option Screen Shot][i_option_screenshot]
+![i option Screen Shot with lower version][i_option_ss1]
+
+![i option Screen Shot with higher version][i_option_ss2]
 
 ![npm test Screen Shot][npm_test_ss]
 
@@ -204,11 +220,10 @@ In order to use this project/ repo / tool there are certain pre-requisites.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- ROADMAP -->
 ## Roadmap
 - [x] ~~Basic Documention (High Priority)~~
-- [ ] More Documention (Normal Priority)
+- [ ] More Documention (When More Features Arrive)
 - [ ] `npm test` (Normal Priority)
 - [x] ~~Move from *'have to work anyhow'* to *'should be logically sound'* (High Priority)~~
 - [ ] Reduce dependency (Low Priority)
@@ -223,7 +238,25 @@ In order to use this project/ repo / tool there are certain pre-requisites.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Changelog
+### v1.1.0
 
+- Added more "Built With" frameworks/libraries in readme
+- Added an additional flag `-f | --force` for force updating the package even if it might break some features
+- Added a test for testing `pull` under `Fork-> Clone -> Push -> Pull` block
+- Added two tests under `Getting the package.json of a Repository` for testing the said action
+- More robust version checking. Supports packages with semantic versioning with formats such as
+    - ^1.5.6
+    - ~2.4.5
+    - 1
+    - 2.x
+    - 17.0
+    - 17.0.x
+    - 1.6.5 - 2.5.6
+- After all entries have been checked and necesary actions have been done the `Temorary_Directory` will be deleted.
+
+See the full list of changelog listed on [*CHANGELOG.md*](./CHANGELOG.md)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -288,9 +321,10 @@ Project Link: [https://github.com/dyte-submissions/dyte-vit-2022-Aritra779](http
 [license-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/aritra-dutta-6943a1222/
-[product-screenshot]: images/screenshot.png
-[i_option_screenshot]: images/i_option.png
-[npm_test_ss]: images/test.png
-[u_option_ss1]: images/u_option_1.png
-[u_option_ss2]: images/u_option_2.png
-[u_option_ss3]: images/u_option_3.png
+[product-screenshot]: images/pull_proof.png
+[i_option_ss1]: images/i_option_1.png
+[i_option_ss2]: images/i_option_2.png
+[npm_test_ss]: images/npm_test.png
+[u_option_ss1]: images/u_flag_ss1.png
+[u_option_ss2]: images/u_flag_ss2.png
+[u_option_ss3]: images/u_flag_ss3.png

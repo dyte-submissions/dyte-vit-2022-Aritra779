@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.1
+
+### Changed
+- Fixed typos
+- Fixed the images in readme not showing up (hopefully this time it's fixed)
+- Fixed the output csv file not having the correct link to the generated pull request
+
 ## v1.1.0
 
 ### Added
@@ -27,14 +34,15 @@
 - Changed the priotity of `npm test` from *High* to *Normal*
 - Changed the priority of *reduce dependency* from *Noraml* to *Low*
 ### Removed
-- get-repo-package-json
+- [get-repo-package-json](https://www.npmjs.com/package/get-repo-package-json)
 - test for get-repo-package-json
 
 ## v1.0.0
 
-### Added or Changed
+### Added
 - Added this changelog :)
 - Back to top links
 - Added "Built With" frameworks
 - Changed table of contents to start collapsed
 - Added checkboxes for major features on roadmap
+- Added the entire project except for the pre-build template
