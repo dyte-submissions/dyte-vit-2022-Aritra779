@@ -1,14 +1,28 @@
 import fs from 'fs';
+import { rm } from 'fs/promises';
 import csv from 'csv-parser';
 import { createObjectCsvWriter } from 'csv-writer';
 import chalk from 'chalk';
-import getPackage from 'get-repo-package-json';
+import { Octokit } from "@octokit/rest";
+import gh from 'github-url-to-object';
 import {updateDependency} from './updateDependency.js';
+import checkVersion from './checkVersion.js';
 
-const checkDependency =  (fileName, pckgDet,flag = false) => {
+const octokit = new Octokit({})
+
+const removeDirectory = async (dirPath) => {
+    try {
+      await rm(dirPath, { recursive: true });
+      console.log(chalk.green("Directory removed!"));
+    } catch (err) {
+      console.log(chalk.red('Something went wrong while deleting a directory. Please delete them manually'));
+    }
+  };
+
+const checkDependency =  (fileName, pckgDet,updateFlag = false, forceFlag = false) => {
     const file = fileName;
-    const pckg = pckgDet;
-    const [packageName, packageVersion] = pckg.split('@');
+    let deleteFlag = false;
+    const [packageName, packageVersion] = pckgDet.split('@');
     const inputData = [];
     const outputCSV = createObjectCsvWriter({
         path : fileName,
@@ -29,33 +43,59 @@ const checkDependency =  (fileName, pckgDet,flag = false) => {
             for(let  i = 0; i < inputData.length; i++){
                console.log(chalk.cyan(`Checking Package [${(i+1)} / ${inputData.length}]`));
                 console.log(chalk.blue(`checking package ${inputData[i].name} from ${inputData[i].repo}`));
-                await getPackage(inputData[i].repo)
-                .then(async(pkg) => {
-
-                    const version = pkg.dependencies[packageName]?.slice(1);
-                    inputData[i].version = version;
-                    if(version && version >= packageVersion){
-                        console.log(chalk.green(`Found Version ${version}`));
+                const {user, repo, branch} = gh(inputData[i].repo);
+                let getResponse;
+                if(branch === 'master'){
+                    getResponse = await octokit.request(`GET /repos/${user}/${repo}/contents/package.json`, {
+                        owner: user,
+                        repo: repo,
+                        path: './package.json'
+                      })
+                }else{
+                    getResponse = await octokit.request(`GET /repos/${user}/${repo}/contents/package.json`, {
+                        owner: user,
+                        repo: repo,
+                        path: './package.json',
+                        ref : branch
+                      })
+                }
+                const pkg = JSON.parse(Buffer.from(getResponse.data.content, getResponse.data.encoding).toString());
+                const pkg_version = pkg.dependencies[packageName];
+                inputData[i].version = pkg_version;
+                if(pkg_version){
+                let checkResponse = checkVersion(pkg_version, packageVersion);
+                    if(checkResponse.satisfied){
+                        console.log(chalk.green(`Found Version ${pkg_version}`));
                         inputData[i].version_satisfied = true;
-                    }else if(version){
-                        console.log(chalk.yellow(`Found Version ${version}`));
+                    }else if(checkResponse.forceRequired){
+                        console.log(chalk.yellow(`Found Version ${pkg_version}`));
                         inputData[i].version_satisfied = false;
-                        if(flag){
-                            inputData[i].update_pr =  await updateDependency(inputData[i].repo, pckg);
+                        if(updateFlag && forceFlag){
+                            console.log(chalk.bgRed('Updating to the specified version might break certain features. Still trying to update since -f or -force is used.'));
+                            inputData[i].update_pr =  await updateDependency(user, repo, pckgDet);
+                            deleteFlag = true;
+                        }else if(updateFlag){
+                            console.log(chalk.red('Updating to the specified version might break certain features. Hence Update not initiated. If you want to update it anyhow then pass the -f or -force option.'));
                         }
                     }else{
-                        console.log(chalk.red('Package not found on dependency List'))
+                        console.log(chalk.yellow(`Found Version ${pkg_version}`));
+                        inputData[i].version_satisfied = false;
+                        if(updateFlag){
+                            inputData[i].update_pr =  await updateDependency(user, repo , pckgDet);
+                            deleteFlag = true;
+                        }
                     }
-                })
+                }else{
+                console.log(chalk.red('Package not found on dependency List'))
+                }
             }
 
             outputCSV.writeRecords(inputData)
             .then(() => {
-                console.log("Job Done!")
+                console.log(chalk.bgGreen("Job Done!"))
             });
+            if(deleteFlag) removeDirectory('./Temporary_Directory');
         })
-    
-    
         
 }
 

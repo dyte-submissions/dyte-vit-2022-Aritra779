@@ -1,33 +1,4 @@
 {
-  "status": 202,
-  "url": "https://api.github.com/repos/TestAccount357/Test_Repo/forks",
-  "headers": {
-    "access-control-allow-origin": "*",
-    "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset",
-    "connection": "close",
-    "content-length": "15369",
-    "content-security-policy": "default-src 'none'",
-    "content-type": "application/json; charset=utf-8",
-    "date": "Wed, 01 Jun 2022 14:38:10 GMT",
-    "github-authentication-token-expiration": "2022-06-07 13:00:57 UTC",
-    "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
-    "server": "GitHub.com",
-    "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
-    "vary": "Accept-Encoding, Accept, X-Requested-With",
-    "x-accepted-oauth-scopes": "",
-    "x-content-type-options": "nosniff",
-    "x-frame-options": "deny",
-    "x-github-media-type": "github.v3; format=json",
-    "x-github-request-id": "D3C6:1CE2:65C173:6F0CC5:629779D0",
-    "x-oauth-scopes": "admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, delete:packages, delete_repo, gist, notifications, repo, user, write:discussion, write:packages",
-    "x-ratelimit-limit": "5000",
-    "x-ratelimit-remaining": "4981",
-    "x-ratelimit-reset": "1654095578",
-    "x-ratelimit-resource": "core",
-    "x-ratelimit-used": "19",
-    "x-xss-protection": "0"
-  },
-  "data": {
     "id": 498774103,
     "node_id": "R_kgDOHbqwVw",
     "name": "Test_Repo",
@@ -292,4 +263,3 @@
     "network_count": 1,
     "subscribers_count": 0
   }
-}

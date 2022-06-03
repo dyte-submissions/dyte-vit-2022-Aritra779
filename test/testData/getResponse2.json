@@ -1,0 +1,18 @@
+{
+    "name": "package.json",
+    "path": "package.json",
+    "sha": "f47306c30c640239dba55cd1304fb168b03d1dec",
+    "size": 574,
+    "url": "https://api.github.com/repos/Aritra779/Test_Repo/contents/package.json?ref=updates",
+    "html_url": "https://github.com/Aritra779/Test_Repo/blob/updates/package.json",
+    "git_url": "https://api.github.com/repos/Aritra779/Test_Repo/git/blobs/f47306c30c640239dba55cd1304fb168b03d1dec",
+    "download_url": "https://raw.githubusercontent.com/Aritra779/Test_Repo/updates/package.json",
+    "type": "file",
+    "content": "ewogICJuYW1lIjogInRlc3RfcmVwbyIsCiAgInZlcnNpb24iOiAiMS4wLjAi\nLAogICJkZXNjcmlwdGlvbiI6ICJUaGlzIGlzIGp1c3QgYSB0ZXN0IHJlcG9z\naXRvcnkgdXNlZCBmb3IgdGVzdGluZyIsCiAgIm1haW4iOiAiaW5kZXguanMi\nLAogICJzY3JpcHRzIjogewogICAgInRlc3QiOiAiZWNobyBcIkVycm9yOiBu\nbyB0ZXN0IHNwZWNpZmllZFwiICYmIGV4aXQgMSIKICB9LAogICJyZXBvc2l0\nb3J5IjogewogICAgInR5cGUiOiAiZ2l0IiwKICAgICJ1cmwiOiAiZ2l0K2h0\ndHBzOi8vZ2l0aHViLmNvbS9UZXN0QWNjb3VudDM1Ny9UZXN0X1JlcG8uZ2l0\nIgogIH0sCiAgImtleXdvcmRzIjogW10sCiAgImF1dGhvciI6ICIiLAogICJs\naWNlbnNlIjogIklTQyIsCiAgImJ1Z3MiOiB7CiAgICAidXJsIjogImh0dHBz\nOi8vZ2l0aHViLmNvbS9UZXN0QWNjb3VudDM1Ny9UZXN0X1JlcG8vaXNzdWVz\nIgogIH0sCiAgImhvbWVwYWdlIjogImh0dHBzOi8vZ2l0aHViLmNvbS9UZXN0\nQWNjb3VudDM1Ny9UZXN0X1JlcG8jcmVhZG1lIiwKICAiZGVwZW5kZW5jaWVz\nIjogewogICAgImF4aW9zIjogIl4wLjI1LjAiCiAgfQp9Cg==\n",
+    "encoding": "base64",
+    "_links": {
+      "self": "https://api.github.com/repos/Aritra779/Test_Repo/contents/package.json?ref=updates",
+      "git": "https://api.github.com/repos/Aritra779/Test_Repo/git/blobs/f47306c30c640239dba55cd1304fb168b03d1dec",
+      "html": "https://github.com/Aritra779/Test_Repo/blob/updates/package.json"
+    }
+}

@@ -101,6 +101,16 @@ In addition to that if the version is below specified version it'll automaticall
 
 * [nodeJS](https://nodejs.org/)
 * [npm](https://www.npmjs.com/)
+* [commander](https://www.npmjs.com/package/commander)
+* [chalk](https://www.npmjs.com/package/chalk)
+* [csv-parser](https://www.npmjs.com/package/csv-parser)
+* [csv-writer](https://www.npmjs.com/package/csv-writer)
+* [dotenv](https://www.npmjs.com/package/dotenv)
+* [octokit/rest](https://www.npmjs.com/package/@octokit/rest)
+* [github-url-to-object](https://www.npmjs.com/package/github-url-to-object)
+* [nock](https://www.npmjs.com/package/nock)
+* [mocha](https://www.npmjs.com/package/mocha)
+* [chai](https://www.npmjs.com/package/chai)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -158,45 +168,58 @@ In order to use this project/ repo / tool there are certain pre-requisites.
   myawesometool -i <somefile.csv> <package_name@version>
   ``` 
 *  For creating an automated PR(pull request) along with the above task run
-```sh
-myswesometool -update -i <somefile.csv> <package_name@version>
-``` 
-  **This requires github PAT.**
+    ```sh
+    myawesometool -update -i <somefile.csv> <package_name@version>
+    ``` 
+    **This requires github PAT.**
+
+    *Also note that this will not update the mentioned package if the mentioned version isn't in the compatibility range mentioned in the package.json*
+* For forcefully updating a package even if it might break certain features run
+  ```sh
+  myawesometool -i -u -f <somefile.csv> <package_name@version>
+  ```
 * ```sh
   npm test
   ``` 
-is currently incomplete. Only fork test is implemented. The API call is mocked. You can test it out without a worry. 
-* don't run it outside of the project directory for the time being (*will be looked into later*)
-* A lot(most if not all w.r.t experienced people) of the logic makes no sence (specially asynchoronous ones). This was developed with *'have to work anyhow'* in mind and not *'should be logically sound'*. 
-* Currently the code does not delete the locally cloned repository. So delete them manually. (*Will try to automate as soon as possible*)
+  is currently has only 4 tests. Fork test and Pull test tests the corespoding API call. The API call is mocked. You can test it out without a worry. The other two tests are for testing out API call to get the package.json file of any repo. These two calls are also mocked. Hence you can test it out without a single worry.
+* Don't run it outside of the project directory for the time being (*will be looked into later*)
 * There's a sample_d.csv file with two repo links. (optinal)Delete the last 3 columns(everything except `name` and `repo` column). First repo doesn't have `axios`. It's my personal repo. Second one has `axios 0.23.0`. So for testing test with anything higher than that.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-![-i option](images/i_option.png)
-![npm test](images/test.png)
-![-u option ss1](images/u_option_1.png)
-![-u option ss2](images/u_option_2.png)
-![-u option ss3](images/u_option_3.png)
+<div align = 'center'>
+
+![i option Screen Shot][i_option_screenshot]
+
+![npm test Screen Shot][npm_test_ss]
+
+![-u Option Screen Shot1][u_option_ss1]
+
+![-u Option Screen Shot2][u_option_ss2]
+
+![-u Option Screen Shot3][u_option_ss3]
+
+</div>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- ROADMAP -->
 ## Roadmap
-- [x] ~~Basic Documention (<span style = 'color : red'>High Priority</span>)~~
-- [ ] More Documention (<span style = 'color : Yellow'>Normal Priority</span>)
-- [ ] `npm test` (<span style = 'color : orange'>High Priority</span>)
-- [ ] Move from *'have to work anyhow'* to *'should be logically sound'* (<span style = 'color : red'>High Priority</span>)
-- [ ] reduce dependency (<span style = 'color : yellow'>Normal Priority</span>)
-    - [ ] csv-parser (<span style = 'color : green'>Low Priority</span>)
-    - [ ] csv-writer (<span style = 'color : green'>Low Priority</span> )
-    - [ ] get-repo-package-json (<span style = 'color : red'>High Priority</span>)
-    - [ ] github-url-to-object (<span style = 'color : blue'>Not Likely</span>)
-    - [ ] chalk (<span style = 'color : blue'>probably Not</span>)
-    - [ ] commander (<span style = 'color : blue'>When there's a better option available</span>)
-- [ ] Robustness (<span style = 'color : yellow'>Normal Priority</span>)
-- [ ] More features I can't think of right now (<span style = 'color : green'>Low Priority</span>)
+- [x] ~~Basic Documention (High Priority)~~
+- [ ] More Documention (Normal Priority)
+- [ ] `npm test` (Normal Priority)
+- [x] ~~Move from *'have to work anyhow'* to *'should be logically sound'* (High Priority)~~
+- [ ] Reduce dependency (Low Priority)
+    - [ ] csv-parser (Low Priority)
+    - [ ] csv-writer (Low Priority)
+    - [x] ~~get-repo-package-json (High Priority)~~
+    - [ ] github-url-to-object (Not Likely)
+    - [ ] chalk (probably Not)
+    - [ ] commander (When there's a better option available)
+- [ ] Robustness (Normal Priority)
+- [ ] More features I can't think of right now (Low Priority)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -266,3 +289,8 @@ Project Link: [https://github.com/dyte-submissions/dyte-vit-2022-Aritra779](http
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/aritra-dutta-6943a1222/
 [product-screenshot]: images/screenshot.png
+[i_option_screenshot]: images/i_option.png
+[npm_test_ss]: images/test.png
+[u_option_ss1]: images/u_option_1.png
+[u_option_ss2]: images/u_option_2.png
+[u_option_ss3]: images/u_option_3.png
