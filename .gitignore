@@ -8,9 +8,11 @@
 # testing
 /coverage
 /Temporary_Directory
+*_output.csv
 
 # production
 /build
+
 
 # misc
 .DS_Store

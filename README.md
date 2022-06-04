@@ -90,7 +90,7 @@ Automatic Pull requests like below
 
 *Currently works with only github.*
 
-This project is about building a simple CLI tool that will look through a file(currently only .csv file) and let the user know about the version of specified dependency of a project/repo listed in the file. It also writes the same info onto the file.
+This project is about building a simple CLI tool that will look through a file(currently only .csv file) and let the user know about the version of specified dependency of a project/repo listed in the file. It also writes the same info onto another file.
 
 The link to the repository can be any one of the following format:
 (taken straight out of [github-url-to-object](https://www.npmjs.com/package/github-url-to-object) page)
@@ -116,8 +116,6 @@ In addition to the above mentioned task if the version is below specified versio
 - Libraries(for Core Functionality)
   * [commander](https://www.npmjs.com/package/commander)
   * [chalk](https://www.npmjs.com/package/chalk)
-  * [csv-parser](https://www.npmjs.com/package/csv-parser)
-  * [csv-writer](https://www.npmjs.com/package/csv-writer)
   * [dotenv](https://www.npmjs.com/package/dotenv)
   * [octokit/rest](https://www.npmjs.com/package/@octokit/rest)
   * [github-url-to-object](https://www.npmjs.com/package/github-url-to-object)
@@ -191,12 +189,30 @@ In order to use this project/ repo / tool there are certain pre-requisites.
   ```sh
   myawesometool -i -u -f <somefile.csv> <package_name@version>
   ```
+* For starting at a specified row index run
+  ```sh
+  myawesometool -i -s4 <somefile.csv> <package_name@version>
+  ```
+  OR
+  ```sh
+  myawesometool -i --start=4 <somefile.csv> <package_name@version>
+  ```
+  If the csv file has no header then pass `--start=-1`
+* If you own all the repositories mentioned in the csv file or if you have write access or branch creation access to them then run
+  ```sh
+  myawesometool -i -u -o <somefile.csv> <package_name@version>
+  ```
+  Use this option when forking isn't necessary.
+
+  Currently mixture of self owned and not owned repository cannot be process together. Best action plan in that case would be to keep them in two differnt files and then use the tool.
 * ```sh
   npm test
   ``` 
   currently has only 4 tests. Fork test and Pull test test the correspoding API calls. The API call is mocked. You can test it out without a worry. The other two tests are for testing out API call to get the package.json file of any repo. These two calls are also mocked. Hence you can test it out without a single worry.
 * Don't run it outside of the project directory for the time being (*will be looked into later*)
-* There's a sample_d.csv file with two repo links. (optinal)Delete the last 3 columns(everything except `name` and `repo` column). First repo doesn't have `axios`. It's my personal repo. Second one has `axios 0.23.0`. So for testing test with anything higher than that.
+* This tool expects the first column of the csv file to be the `name` of the repository, the second column to be the `link of the repository`. It'll also add the `version` in the 3rd column, `version satisfiability condition` in 4th column and the `generated PR link` in the 5th column. 
+* **Note:** *After the task has been performed the auto generated directory named `Temporary_Directory` will be automatically deleted. But this takes some time, huge lot of time in some cases. Also it doesn't report the deletion progress. It'll only report when there's an error or when the complete deletion task is done. If you don't want to wait around for the deletion task then it's best to stop the process there and manually delete the directory. No harm will be done to the overall task since the core task has already been completed by that time.* 
+* There's a sample_d.csv file with two repo links. First repo (named `test`) have `axios 0.25.0` and `react 18.0.0`. Second one doesn't have `react` but have `axios 0.23.0`. So for testing PR generation test with anything higher than the specified versions.
 <!-- USAGE EXAMPLES -->
 
 ## Usage
@@ -227,8 +243,8 @@ In order to use this project/ repo / tool there are certain pre-requisites.
 - [ ] `npm test` (Normal Priority)
 - [x] ~~Move from *'have to work anyhow'* to *'should be logically sound'* (High Priority)~~
 - [ ] Reduce dependency (Low Priority)
-    - [ ] csv-parser (Low Priority)
-    - [ ] csv-writer (Low Priority)
+    - [x] ~~csv-parser (Low Priority)~~
+    - [x] ~~csv-writer (Low Priority)~~
     - [x] ~~get-repo-package-json (High Priority)~~
     - [ ] github-url-to-object (Not Likely)
     - [ ] chalk (probably Not)
@@ -239,21 +255,12 @@ In order to use this project/ repo / tool there are certain pre-requisites.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Changelog
-### v1.1.0
+### v1.2.0
 
-- Added more "Built With" frameworks/libraries in readme
-- Added an additional flag `-f | --force` for force updating the package even if it might break some features
-- Added a test for testing `pull` under `Fork-> Clone -> Push -> Pull` block
-- Added two tests under `Getting the package.json of a Repository` for testing the said action
-- More robust version checking. Supports packages with semantic versioning with formats such as
-    - ^1.5.6
-    - ~2.4.5
-    - 1
-    - 2.x
-    - 17.0
-    - 17.0.x
-    - 1.6.5 - 2.5.6
-- After all entries have been checked and necesary actions have been done the `Temorary_Directory` will be deleted.
+- Added an additional flag `-s | --start` for specifying which row (0 indexed) of the file to start execution from
+- Added an additional flag `-o | --own` for specifying whether the user owns all the repository listed in the csv file. If this flag is passed forking won't be done.
+- Added a request limit checking logic that'll automatically stop the execution if the request limit per hour (according to github API) is about to be reached.
+- Added a condition that'll check if the github PAT is defined in `.env` file under `G_TOKEN` variable. If not then using `-u | --update` will not perform the said task.
 
 See the full list of changelog listed on [*CHANGELOG.md*](./CHANGELOG.md)
 <p align="right">(<a href="#top">back to top</a>)</p>

@@ -88,13 +88,17 @@ const clone_and_push = (repository, pckg, repo) => {
 const pull = async (owner, repo,login, pckg) => {
   console.log(chalk.cyan('\nTrying to generate a PR(Pull Request)\n'))
   try{
+    let {data : {default_branch}} = await octokit.request(`GET /repos/${owner}/${repo}`, {
+      owner: owner,
+      repo: repo
+    })
     const response = await octokit.request(`POST /repos/${owner}/${repo}/pulls`, {
-      owner: "owner",
+      owner: owner,
       repo: repo,
       title: `Upgraded a package named ${pckg}`,
       body: 'Please pull these awesome changes in!',
       head: `${login}:updates`,
-      base: 'main'
+      base: default_branch
     })
     if(response.status === 201){
       console.log(chalk.green(`\nSuccessfully generated a PR at ${owner}/${repo}...Hopefully the author will see it and value your contribution. ;)\n`))
@@ -108,12 +112,16 @@ const pull = async (owner, repo,login, pckg) => {
   
 }
 
-const updateDependency = async (user, repo, pckg) => {
+const updateDependency = async (user, repo, pckg, ownRepo) => {
     try{
-      let forkResponse = await fork(user, repo);
-      let cloneResponse = clone_and_push(forkResponse.data["html_url"], pckg,repo);
+      let forkResponse;
+      if(!ownRepo){
+        forkResponse = await fork(user, repo);
+      }
+      const repoLinkToClone = forkResponse?.data["html_url"] || `https://github.com/${user}/${repo}`;
+      let cloneResponse = clone_and_push(repoLinkToClone, pckg, repo);
       let {data : {login}} = await octokit.request('GET /user', {})
-      let pullResponse = await pull(user,repo, login, pckg)
+      let pullResponse = await pull(user, repo, login, pckg)
       return pullResponse.data["html_url"];
     }catch(err){
       console.log(chalk.red(`\nSomething looks suspicious. Here take a look at the error ${err}\n`))
