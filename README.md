@@ -34,19 +34,19 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">myawesometool</h3>
 
   <p align="center">
-    project_description
+    A CLI tool to automatically check for dependency of a specified package and then create a PR updating the package.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/dyte-submissions/dyte-vit-2022-Aritra779"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/dyte-submissions/dyte-vit-2022-Aritra779">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/issues">Request Feature</a>
   </p>
 </div>
 
@@ -67,6 +67,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#how_to_use">How to use</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -78,92 +79,191 @@
   </ol>
 </details>
 
-
+___
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Automatic Pull requests like below
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+![Product Name Screen Shot][product-screenshot]
 
+*Currently works with only github.*
+
+This project is about building a simple CLI tool that will look through a file(currently only .csv file) and let the user know about the version of specified dependency of a project/repo listed in the file. It also writes the same info onto another file.
+
+The link to the repository can be any one of the following format:
+(taken straight out of [github-url-to-object](https://www.npmjs.com/package/github-url-to-object) page)
+<pre>
+  * 'github:monkey/business'
+  * 'https://github.com/monkey/business'
+  * 'https://github.com/monkey/business/tree/master'
+  * 'github:monkey/business#nachos'
+  * 'https://github.com/monkey/business/tree/master/nested/file.js'
+  * 'https://github.com/monkey/business.git'
+  * 'http://github.com/monkey/business'
+  * 'git://github.com/monkey/business.git'
+  * 'git+https://github.com/monkey/business.git'
+</pre>
+
+In addition to the above mentioned task if the version is below specified version it'll automatically `fork`, `clone`, `update`, `push` and `create a PR` to the original repo. Provided we tell it to do so.
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+- Platforms and Registry
+  * [nodeJS](https://nodejs.org/)
+  * [npm](https://www.npmjs.com/)
+- Libraries(for Core Functionality)
+  * [commander](https://www.npmjs.com/package/commander)
+  * [chalk](https://www.npmjs.com/package/chalk)
+  * [dotenv](https://www.npmjs.com/package/dotenv)
+  * [octokit/rest](https://www.npmjs.com/package/@octokit/rest)
+  * [github-url-to-object](https://www.npmjs.com/package/github-url-to-object)
+- Libraries (for Testing)
+  * [nock](https://www.npmjs.com/package/nock)
+  * [mocha](https://www.npmjs.com/package/mocha)
+  * [chai](https://www.npmjs.com/package/chai)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+In order to use this project/ repo / tool there are certain pre-requisites. 
+* node
 * npm
   ```sh
   npm install npm@latest -g
   ```
+* A code Editor (e.g., Visual Studio, VS Code, Sublime Text, Atom etc.)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get your personal access token from github(required only when using the `-u` option. Not required for the `-i` option). Follow this for creating your PAT(Personal Access Token) [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/dyte-submissions/dyte-vit-2022-Aritra779.git
    ```
 3. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. (Optionally required for `-u` option) Enter your PAT(Personal Access Token) in a `.env` file in `G_TOKEN` variable. Change the name everywhere if you wish.
+   ```
+   G_TOKEN = 'ENTER YOUR PAT'
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### How to use
 
+* Move into the project directory from command line / shell / bash
+  ```sh
+  cd dyte-vit-2022-Aritra779
+  ```
+* For help run
+  ```sh
+  myawesometool -h
+  ``` 
+  or 
+  ```sh
+  myawesometool --help
+  ```
+* For reading a CSV file and listing out dependency version satisfiability status run 
+  ```sh
+  myawesometool -i <somefile.csv> <package_name@version>
+  ``` 
+*  For creating an automated PR(pull request) along with the above task run
+    ```sh
+    myawesometool -update -i <somefile.csv> <package_name@version>
+    ``` 
+    **This requires github PAT(Personal Access Token).**
 
+    *Also note that this will not update the mentioned package if the mentioned version isn't in the compatibility range mentioned in the package.json*
+* For forcefully updating a package even if it might break certain features run
+  ```sh
+  myawesometool -i -u -f <somefile.csv> <package_name@version>
+  ```
+* For starting at a specified row index run
+  ```sh
+  myawesometool -i -s4 <somefile.csv> <package_name@version>
+  ```
+  OR
+  ```sh
+  myawesometool -i --start=4 <somefile.csv> <package_name@version>
+  ```
+  If the csv file has no header then pass `--start=-1`
+* If you own all the repositories mentioned in the csv file or if you have write access or branch creation access to them then run
+  ```sh
+  myawesometool -i -u -o <somefile.csv> <package_name@version>
+  ```
+  Use this option when forking isn't necessary.
+
+  Currently mixture of self owned and not owned repository cannot be process together. Best action plan in that case would be to keep them in two differnt files and then use the tool.
+* ```sh
+  npm test
+  ``` 
+  currently has only 4 tests. Fork test and Pull test test the correspoding API calls. The API call is mocked. You can test it out without a worry. The other two tests are for testing out API call to get the package.json file of any repo. These two calls are also mocked. Hence you can test it out without a single worry.
+* Don't run it outside of the project directory for the time being (*will be looked into later*)
+* This tool expects the first column of the csv file to be the `name` of the repository, the second column to be the `link of the repository`. It'll also add the `version` in the 3rd column, `version satisfiability condition` in 4th column and the `generated PR link` in the 5th column. 
+* **Note:** *After the task has been performed the auto generated directory named `Temporary_Directory` will be automatically deleted. But this takes some time, huge lot of time in some cases. Also it doesn't report the deletion progress. It'll only report when there's an error or when the complete deletion task is done. If you don't want to wait around for the deletion task then it's best to stop the process there and manually delete the directory. No harm will be done to the overall task since the core task has already been completed by that time.* 
+* There's a sample_d.csv file with two repo links. First repo (named `test`) have `axios 0.25.0` and `react 18.0.0`. Second one doesn't have `react` but have `axios 0.23.0`. So for testing PR generation test with anything higher than the specified versions.
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<div align = 'center'>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+![i option Screen Shot with lower version][i_option_ss1]
+
+![i option Screen Shot with higher version][i_option_ss2]
+
+![npm test Screen Shot][npm_test_ss]
+
+![-u Option Screen Shot1][u_option_ss1]
+
+![-u Option Screen Shot2][u_option_ss2]
+
+![-u Option Screen Shot3][u_option_ss3]
+
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ROADMAP -->
 ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- [x] ~~Basic Documention (High Priority)~~
+- [ ] More Documention (When More Features Arrive)
+- [ ] `npm test` (Normal Priority)
+- [x] ~~Move from *'have to work anyhow'* to *'should be logically sound'* (High Priority)~~
+- [ ] Reduce dependency (Low Priority)
+    - [x] ~~csv-parser (Low Priority)~~
+    - [x] ~~csv-writer (Low Priority)~~
+    - [x] ~~get-repo-package-json (High Priority)~~
+    - [ ] github-url-to-object (Not Likely)
+    - [ ] chalk (probably Not)
+    - [ ] commander (When there's a better option available)
+- [ ] Robustness (Normal Priority)
+- [ ] More features I can't think of right now (Low Priority)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Changelog
+### v1.2.0
 
+- Added an additional flag `-s | --start` for specifying which row (0 indexed) of the file to start execution from
+- Added an additional flag `-o | --own` for specifying whether the user owns all the repository listed in the csv file. If this flag is passed forking won't be done.
+- Added a request limit checking logic that'll automatically stop the execution if the request limit per hour (according to github API) is about to be reached.
+- Added a condition that'll check if the github PAT is defined in `.env` file under `G_TOKEN` variable. If not then using `-u | --update` will not perform the said task.
+
+See the full list of changelog listed on [*CHANGELOG.md*](./CHANGELOG.md)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -195,9 +295,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Aritra Dutta - aritra.dutta.366@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/dyte-submissions/dyte-vit-2022-Aritra779](https://github.com/dyte-submissions/dyte-vit-2022-Aritra779)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -217,15 +317,21 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[contributors-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
+[forks-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
+[stars-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
+[issues-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/issues
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[license-url]: https://github.com/dyte-submissions/dyte-vit-2022-Aritra779/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/aritra-dutta-6943a1222/
+[product-screenshot]: images/pull_proof.png
+[i_option_ss1]: images/i_option_1.png
+[i_option_ss2]: images/i_option_2.png
+[npm_test_ss]: images/npm_test.png
+[u_option_ss1]: images/u_flag_ss1.png
+[u_option_ss2]: images/u_flag_ss2.png
+[u_option_ss3]: images/u_flag_ss3.png
